@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/student
+      username: root
+      password: 2459786062
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.ilem.domain
+# SQL log
+logging:
+  level:
+    com.ilme.student.mapper: debug
+
+dubbo:
+  application:
+    name: student-center
+  registry:
+    address: zookeeper://localhost:2181
+  protocol:
+    name: dubbo
+    port: 20880
+  scan:
+    base-packages: com.ilme.student.service

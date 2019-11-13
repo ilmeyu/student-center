@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ilme.student.mapper.SimsClassMapper">
+  <resultMap id="BaseResultMap" type="com.ilem.domain.SimsClass">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COLLEGE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MAJOR_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="STUDENT_NUMBER" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ADVISER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ESTAB_DATE" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="YEAR_NUMBER" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="CRATED_BY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CRATED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="UPDATED_BY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="UPDATED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, COLLEGE_ID, MAJOR_ID, NAME, STUDENT_NUMBER, ADVISER, ESTAB_DATE, YEAR_NUMBER, 
+    CRATED_BY, CRATED_TIME, UPDATED_BY, UPDATED_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.ilme.student.model.SimsClassExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SIMS_CLASS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SIMS_CLASS
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SIMS_CLASS
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ilme.student.model.SimsClassExample">
+    delete from SIMS_CLASS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ilem.domain.SimsClass">
+    insert into SIMS_CLASS (ID, COLLEGE_ID, MAJOR_ID, 
+      NAME, STUDENT_NUMBER, ADVISER, 
+      ESTAB_DATE, YEAR_NUMBER, CRATED_BY, 
+      CRATED_TIME, UPDATED_BY, UPDATED_TIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, #{majorId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{studentNumber,jdbcType=INTEGER}, #{adviser,jdbcType=VARCHAR}, 
+      #{estabDate,jdbcType=DATE}, #{yearNumber,jdbcType=INTEGER}, #{cratedBy,jdbcType=VARCHAR}, 
+      #{cratedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ilem.domain.SimsClass">
+    insert into SIMS_CLASS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="collegeId != null">
+        COLLEGE_ID,
+      </if>
+      <if test="majorId != null">
+        MAJOR_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="studentNumber != null">
+        STUDENT_NUMBER,
+      </if>
+      <if test="adviser != null">
+        ADVISER,
+      </if>
+      <if test="estabDate != null">
+        ESTAB_DATE,
+      </if>
+      <if test="yearNumber != null">
+        YEAR_NUMBER,
+      </if>
+      <if test="cratedBy != null">
+        CRATED_BY,
+      </if>
+      <if test="cratedTime != null">
+        CRATED_TIME,
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null">
+        #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="majorId != null">
+        #{majorId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNumber != null">
+        #{studentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="adviser != null">
+        #{adviser,jdbcType=VARCHAR},
+      </if>
+      <if test="estabDate != null">
+        #{estabDate,jdbcType=DATE},
+      </if>
+      <if test="yearNumber != null">
+        #{yearNumber,jdbcType=INTEGER},
+      </if>
+      <if test="cratedBy != null">
+        #{cratedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="cratedTime != null">
+        #{cratedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ilme.student.model.SimsClassExample" resultType="java.lang.Long">
+    select count(*) from SIMS_CLASS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SIMS_CLASS
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collegeId != null">
+        COLLEGE_ID = #{record.collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.majorId != null">
+        MAJOR_ID = #{record.majorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentNumber != null">
+        STUDENT_NUMBER = #{record.studentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.adviser != null">
+        ADVISER = #{record.adviser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estabDate != null">
+        ESTAB_DATE = #{record.estabDate,jdbcType=DATE},
+      </if>
+      <if test="record.yearNumber != null">
+        YEAR_NUMBER = #{record.yearNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.cratedBy != null">
+        CRATED_BY = #{record.cratedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cratedTime != null">
+        CRATED_TIME = #{record.cratedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedBy != null">
+        UPDATED_BY = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedTime != null">
+        UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SIMS_CLASS
+    set ID = #{record.id,jdbcType=VARCHAR},
+      COLLEGE_ID = #{record.collegeId,jdbcType=VARCHAR},
+      MAJOR_ID = #{record.majorId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      STUDENT_NUMBER = #{record.studentNumber,jdbcType=INTEGER},
+      ADVISER = #{record.adviser,jdbcType=VARCHAR},
+      ESTAB_DATE = #{record.estabDate,jdbcType=DATE},
+      YEAR_NUMBER = #{record.yearNumber,jdbcType=INTEGER},
+      CRATED_BY = #{record.cratedBy,jdbcType=VARCHAR},
+      CRATED_TIME = #{record.cratedTime,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{record.updatedBy,jdbcType=VARCHAR},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ilem.domain.SimsClass">
+    update SIMS_CLASS
+    <set>
+      <if test="collegeId != null">
+        COLLEGE_ID = #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="majorId != null">
+        MAJOR_ID = #{majorId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNumber != null">
+        STUDENT_NUMBER = #{studentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="adviser != null">
+        ADVISER = #{adviser,jdbcType=VARCHAR},
+      </if>
+      <if test="estabDate != null">
+        ESTAB_DATE = #{estabDate,jdbcType=DATE},
+      </if>
+      <if test="yearNumber != null">
+        YEAR_NUMBER = #{yearNumber,jdbcType=INTEGER},
+      </if>
+      <if test="cratedBy != null">
+        CRATED_BY = #{cratedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="cratedTime != null">
+        CRATED_TIME = #{cratedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ilem.domain.SimsClass">
+    update SIMS_CLASS
+    set COLLEGE_ID = #{collegeId,jdbcType=VARCHAR},
+      MAJOR_ID = #{majorId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      STUDENT_NUMBER = #{studentNumber,jdbcType=INTEGER},
+      ADVISER = #{adviser,jdbcType=VARCHAR},
+      ESTAB_DATE = #{estabDate,jdbcType=DATE},
+      YEAR_NUMBER = #{yearNumber,jdbcType=INTEGER},
+      CRATED_BY = #{cratedBy,jdbcType=VARCHAR},
+      CRATED_TIME = #{cratedTime,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

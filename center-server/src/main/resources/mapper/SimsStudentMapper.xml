@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ilme.student.mapper.SimsStudentMapper">
+  <resultMap id="BaseResultMap" type="com.ilem.domain.SimsStudent">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COLLEGE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CLASS_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ID_CARD_NO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ENG_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MOBILE_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="GENDER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="BIRTH" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="AVATAR" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="HEIGHT" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="WEIGHT" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="NATION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="POLITICAL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MARITAL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DOMICILE_PLACE_PROVINCE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DOMICILE_PLACE_CITY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DOMICILE_PLACE_ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="HOBBY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="INTRO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PRESENT_ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ENTRY_DATE" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREATED_BY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREATED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="UPDATED_BY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="UPDATED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, COLLEGE_ID, CLASS_ID, NAME, ID_CARD_NO, ENG_NAME, MOBILE_PHONE, GENDER, BIRTH, 
+    AVATAR, HEIGHT, WEIGHT, NATION, POLITICAL, MARITAL, DOMICILE_PLACE_PROVINCE, DOMICILE_PLACE_CITY, 
+    DOMICILE_PLACE_ADDRESS, HOBBY, INTRO, PRESENT_ADDRESS, EMAIL, ENTRY_DATE, STATUS, 
+    CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.ilme.student.model.SimsStudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SIMS_STUDENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SIMS_STUDENT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SIMS_STUDENT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ilme.student.model.SimsStudentExample">
+    delete from SIMS_STUDENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ilem.domain.SimsStudent">
+    insert into SIMS_STUDENT (ID, COLLEGE_ID, CLASS_ID, 
+      NAME, ID_CARD_NO, ENG_NAME, 
+      MOBILE_PHONE, GENDER, BIRTH, 
+      AVATAR, HEIGHT, WEIGHT, 
+      NATION, POLITICAL, MARITAL, 
+      DOMICILE_PLACE_PROVINCE, DOMICILE_PLACE_CITY, 
+      DOMICILE_PLACE_ADDRESS, HOBBY, INTRO, 
+      PRESENT_ADDRESS, EMAIL, ENTRY_DATE, 
+      STATUS, CREATED_BY, CREATED_TIME, 
+      UPDATED_BY, UPDATED_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{idCardNo,jdbcType=VARCHAR}, #{engName,jdbcType=VARCHAR}, 
+      #{mobilePhone,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{birth,jdbcType=DATE}, 
+      #{avatar,jdbcType=VARCHAR}, #{height,jdbcType=DECIMAL}, #{weight,jdbcType=DECIMAL}, 
+      #{nation,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR}, #{marital,jdbcType=VARCHAR}, 
+      #{domicilePlaceProvince,jdbcType=VARCHAR}, #{domicilePlaceCity,jdbcType=VARCHAR}, 
+      #{domicilePlaceAddress,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{presentAddress,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{entryDate,jdbcType=DATE}, 
+      #{status,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updatedBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ilem.domain.SimsStudent">
+    insert into SIMS_STUDENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="collegeId != null">
+        COLLEGE_ID,
+      </if>
+      <if test="classId != null">
+        CLASS_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="idCardNo != null">
+        ID_CARD_NO,
+      </if>
+      <if test="engName != null">
+        ENG_NAME,
+      </if>
+      <if test="mobilePhone != null">
+        MOBILE_PHONE,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="birth != null">
+        BIRTH,
+      </if>
+      <if test="avatar != null">
+        AVATAR,
+      </if>
+      <if test="height != null">
+        HEIGHT,
+      </if>
+      <if test="weight != null">
+        WEIGHT,
+      </if>
+      <if test="nation != null">
+        NATION,
+      </if>
+      <if test="political != null">
+        POLITICAL,
+      </if>
+      <if test="marital != null">
+        MARITAL,
+      </if>
+      <if test="domicilePlaceProvince != null">
+        DOMICILE_PLACE_PROVINCE,
+      </if>
+      <if test="domicilePlaceCity != null">
+        DOMICILE_PLACE_CITY,
+      </if>
+      <if test="domicilePlaceAddress != null">
+        DOMICILE_PLACE_ADDRESS,
+      </if>
+      <if test="hobby != null">
+        HOBBY,
+      </if>
+      <if test="intro != null">
+        INTRO,
+      </if>
+      <if test="presentAddress != null">
+        PRESENT_ADDRESS,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="entryDate != null">
+        ENTRY_DATE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId != null">
+        #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNo != null">
+        #{idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="engName != null">
+        #{engName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=DATE},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null">
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="marital != null">
+        #{marital,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilePlaceProvince != null">
+        #{domicilePlaceProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilePlaceCity != null">
+        #{domicilePlaceCity,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilePlaceAddress != null">
+        #{domicilePlaceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="presentAddress != null">
+        #{presentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="entryDate != null">
+        #{entryDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ilme.student.model.SimsStudentExample" resultType="java.lang.Long">
+    select count(*) from SIMS_STUDENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SIMS_STUDENT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collegeId != null">
+        COLLEGE_ID = #{record.collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classId != null">
+        CLASS_ID = #{record.classId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardNo != null">
+        ID_CARD_NO = #{record.idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engName != null">
+        ENG_NAME = #{record.engName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilePhone != null">
+        MOBILE_PHONE = #{record.mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        GENDER = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null">
+        BIRTH = #{record.birth,jdbcType=DATE},
+      </if>
+      <if test="record.avatar != null">
+        AVATAR = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        HEIGHT = #{record.height,jdbcType=DECIMAL},
+      </if>
+      <if test="record.weight != null">
+        WEIGHT = #{record.weight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nation != null">
+        NATION = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.political != null">
+        POLITICAL = #{record.political,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marital != null">
+        MARITAL = #{record.marital,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicilePlaceProvince != null">
+        DOMICILE_PLACE_PROVINCE = #{record.domicilePlaceProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicilePlaceCity != null">
+        DOMICILE_PLACE_CITY = #{record.domicilePlaceCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicilePlaceAddress != null">
+        DOMICILE_PLACE_ADDRESS = #{record.domicilePlaceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hobby != null">
+        HOBBY = #{record.hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intro != null">
+        INTRO = #{record.intro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.presentAddress != null">
+        PRESENT_ADDRESS = #{record.presentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entryDate != null">
+        ENTRY_DATE = #{record.entryDate,jdbcType=DATE},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdBy != null">
+        CREATED_BY = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedBy != null">
+        UPDATED_BY = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedTime != null">
+        UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SIMS_STUDENT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      COLLEGE_ID = #{record.collegeId,jdbcType=VARCHAR},
+      CLASS_ID = #{record.classId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ID_CARD_NO = #{record.idCardNo,jdbcType=VARCHAR},
+      ENG_NAME = #{record.engName,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{record.mobilePhone,jdbcType=VARCHAR},
+      GENDER = #{record.gender,jdbcType=VARCHAR},
+      BIRTH = #{record.birth,jdbcType=DATE},
+      AVATAR = #{record.avatar,jdbcType=VARCHAR},
+      HEIGHT = #{record.height,jdbcType=DECIMAL},
+      WEIGHT = #{record.weight,jdbcType=DECIMAL},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      POLITICAL = #{record.political,jdbcType=VARCHAR},
+      MARITAL = #{record.marital,jdbcType=VARCHAR},
+      DOMICILE_PLACE_PROVINCE = #{record.domicilePlaceProvince,jdbcType=VARCHAR},
+      DOMICILE_PLACE_CITY = #{record.domicilePlaceCity,jdbcType=VARCHAR},
+      DOMICILE_PLACE_ADDRESS = #{record.domicilePlaceAddress,jdbcType=VARCHAR},
+      HOBBY = #{record.hobby,jdbcType=VARCHAR},
+      INTRO = #{record.intro,jdbcType=VARCHAR},
+      PRESENT_ADDRESS = #{record.presentAddress,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      ENTRY_DATE = #{record.entryDate,jdbcType=DATE},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATED_BY = #{record.createdBy,jdbcType=VARCHAR},
+      CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{record.updatedBy,jdbcType=VARCHAR},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ilem.domain.SimsStudent">
+    update SIMS_STUDENT
+    <set>
+      <if test="collegeId != null">
+        COLLEGE_ID = #{collegeId,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null">
+        CLASS_ID = #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNo != null">
+        ID_CARD_NO = #{idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="engName != null">
+        ENG_NAME = #{engName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        BIRTH = #{birth,jdbcType=DATE},
+      </if>
+      <if test="avatar != null">
+        AVATAR = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        HEIGHT = #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        WEIGHT = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="nation != null">
+        NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null">
+        POLITICAL = #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="marital != null">
+        MARITAL = #{marital,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilePlaceProvince != null">
+        DOMICILE_PLACE_PROVINCE = #{domicilePlaceProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilePlaceCity != null">
+        DOMICILE_PLACE_CITY = #{domicilePlaceCity,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilePlaceAddress != null">
+        DOMICILE_PLACE_ADDRESS = #{domicilePlaceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        HOBBY = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        INTRO = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="presentAddress != null">
+        PRESENT_ADDRESS = #{presentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="entryDate != null">
+        ENTRY_DATE = #{entryDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ilem.domain.SimsStudent">
+    update SIMS_STUDENT
+    set COLLEGE_ID = #{collegeId,jdbcType=VARCHAR},
+      CLASS_ID = #{classId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      ID_CARD_NO = #{idCardNo,jdbcType=VARCHAR},
+      ENG_NAME = #{engName,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=VARCHAR},
+      BIRTH = #{birth,jdbcType=DATE},
+      AVATAR = #{avatar,jdbcType=VARCHAR},
+      HEIGHT = #{height,jdbcType=DECIMAL},
+      WEIGHT = #{weight,jdbcType=DECIMAL},
+      NATION = #{nation,jdbcType=VARCHAR},
+      POLITICAL = #{political,jdbcType=VARCHAR},
+      MARITAL = #{marital,jdbcType=VARCHAR},
+      DOMICILE_PLACE_PROVINCE = #{domicilePlaceProvince,jdbcType=VARCHAR},
+      DOMICILE_PLACE_CITY = #{domicilePlaceCity,jdbcType=VARCHAR},
+      DOMICILE_PLACE_ADDRESS = #{domicilePlaceAddress,jdbcType=VARCHAR},
+      HOBBY = #{hobby,jdbcType=VARCHAR},
+      INTRO = #{intro,jdbcType=VARCHAR},
+      PRESENT_ADDRESS = #{presentAddress,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ENTRY_DATE = #{entryDate,jdbcType=DATE},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
