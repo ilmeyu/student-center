@@ -1,6 +1,7 @@
 package com.ilme.student.service;
 
 import com.ilem.domain.AuthUser;
+import com.ilem.dto.input.user.AuthUserAddRpcIn;
 import com.ilem.dto.input.user.AuthUserListRpcIn;
 import com.ilem.server.AuthUserService;
 import com.ilme.student.mapper.AuthUserMapper;
@@ -35,5 +36,10 @@ public class AuthUserServiceImpl implements AuthUserService {
 			criteria.andNameEqualTo(authUser.getName());
 
 		return authUserMapper.selectByExample(authUserExample);
+	}
+
+	@Override
+	public Boolean userAdd(AuthUserAddRpcIn rpcIn) {
+		return null;
 	}
 }
