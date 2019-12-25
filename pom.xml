@@ -13,7 +13,7 @@
 
     <groupId>com.ilem</groupId>
     <artifactId>student-center</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>student-center</name>
 
     <modules>
@@ -26,23 +26,51 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <centor-api.version>0.0.1-SNAPSHOT</centor-api.version>
-        <centor-centor.version>0.0.1-SNAPSHOT</centor-centor.version>
         <mybatis-starter.version>2.0.1</mybatis-starter.version>
+        <druid.version>1.1.20</druid.version>
+        <lombok.version>1.18.10</lombok.version>
+        <dubbo-starter.version>2.7.3</dubbo-starter.version>
+        <curator-recipes.version>4.2.0</curator-recipes.version>
+        <pagehelper-starter.version>1.2.12</pagehelper-starter.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.ilem</groupId>
-                <artifactId>centor-api</artifactId>
-                <version>${centor-api.version}</version>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-recipes.version}</version>
+            </dependency>
+
+            <!-- pagehelper-spring-boot-starter -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.ilem</groupId>
-                <artifactId>centor-server</artifactId>
-                <version>${centor-centor.version}</version>
+                <artifactId>center-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ilem</groupId>
+                <artifactId>center-server</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
@@ -54,22 +82,50 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <distributionManagement>
         <repository>
-            <id>releases</id>
+            <!-- 此处的id值要和maven配置文件中配置的server中的id一致 -->
+            <id>stu</id>
             <name>Nexus Release Repository</name>
             <url>http://106.15.179.204:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
+            <id>stu</id>
             <name>Nexus Snapshot Repository</name>
             <url>http://106.15.179.204:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>stu</id>
+            <url>http://106.15.179.204:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>stu</id>
+            <url>http://106.15.179.204:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
     <build>
         <pluginManagement>
@@ -84,6 +140,25 @@
                         <execution>
                             <goals>
                                 <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <configuration>
+                        <skip>false</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
                             </goals>
                         </execution>
                     </executions>
