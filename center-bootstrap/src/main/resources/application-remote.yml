@@ -1,7 +1,7 @@
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://rm-uf620q7w28q55or7m.mysql.rds.aliyuncs.com:3306/stu
+      url: jdbc:mysql://rm-uf620q7w28q55or7mno.mysql.rds.aliyuncs.com:3306/stu
       username: stu
       password: QWER1234!@#$
 
@@ -17,7 +17,7 @@ dubbo:
   application:
     name: student-center
   registry:
-    address: zookeeper://172.19.168.8:2181
+    address: zookeeper://106.15.179.204:2181
   protocol:
     name: dubbo
     port: 20880
