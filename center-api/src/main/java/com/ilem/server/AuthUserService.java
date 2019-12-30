@@ -14,5 +14,5 @@ public interface AuthUserService {
 
 	List<AuthUser> queryUserList(AuthUserListRpcIn rpcIn);
 
-	Boolean userAdd(AuthUserAddRpcIn rpcIn);
+	AuthUser userAdd(AuthUserAddRpcIn rpcIn);
 }
