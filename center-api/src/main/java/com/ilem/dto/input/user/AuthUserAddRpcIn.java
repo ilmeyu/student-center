@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * @author yuwenkai
  * @date 2019/11/14 11:56 上午
@@ -15,7 +17,10 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class AuthUserAddRpcIn {
+public class AuthUserAddRpcIn implements Serializable {
+
+	/** ID */
+	private String id;
 
 	/** 用户名 */
 	private String name;

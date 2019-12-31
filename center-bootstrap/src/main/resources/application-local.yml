@@ -23,3 +23,5 @@ dubbo:
     port: 20880
   scan:
     base-packages: com.ilme.student.service
+  provider:
+    version: local

@@ -49,6 +49,7 @@ public class AuthUserServiceImpl implements AuthUserService {
 	public AuthUser userAdd(AuthUserAddRpcIn rpcIn) {
 		AuthUser authUser = authUserConverter.userAddDto2Do(rpcIn);
 		authUser.setCreatedTime(new Date());
+
 		return authUserMapper.insert(authUser) > 1 ? authUser : null;
 	}
 }
