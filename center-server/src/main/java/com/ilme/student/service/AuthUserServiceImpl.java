@@ -3,10 +3,12 @@ package com.ilme.student.service;
 import com.ilem.domain.AuthUser;
 import com.ilem.dto.input.user.AuthUserAddRpcIn;
 import com.ilem.dto.input.user.AuthUserListRpcIn;
+import com.ilem.exception.RpcException;
 import com.ilem.server.AuthUserService;
 import com.ilme.student.converter.AuthUserConverter;
 import com.ilme.student.mapper.AuthUserMapper;
 import com.ilme.student.model.AuthUserExample;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,6 +49,15 @@ public class AuthUserServiceImpl implements AuthUserService {
 
 	@Override
 	public AuthUser userAdd(AuthUserAddRpcIn rpcIn) {
+		AuthUserExample authUserQuery = new AuthUserExample();
+		AuthUserExample.Criteria criteria = authUserQuery.createCriteria();
+		criteria.andIdEqualTo(rpcIn.getId());
+		List<AuthUser> authUsers = authUserMapper.selectByExample(authUserQuery);
+
+		if (CollectionUtils.isNotEmpty(authUsers)) {
+			throw new RpcException("用户id已存在！");
+		}
+
 		AuthUser authUser = authUserConverter.userAddDto2Do(rpcIn);
 		authUser.setCreatedTime(new Date());
 

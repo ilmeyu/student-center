@@ -33,6 +33,8 @@
         <dubbo-starter.version>2.7.3</dubbo-starter.version>
         <curator-recipes.version>4.2.0</curator-recipes.version>
         <pagehelper-starter.version>1.2.12</pagehelper-starter.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
     </properties>
 
     <dependencyManagement>
@@ -86,6 +88,7 @@
                 <version>${lombok.version}</version>
             </dependency>
     
+            <!-- mapstruct -->
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-jdk8</artifactId>
@@ -98,6 +101,20 @@
                 <version>${mapstruct.version}</version>
                 <scope>provided</scope>
             </dependency>
+    
+            <!-- apache.commons -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+    
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
