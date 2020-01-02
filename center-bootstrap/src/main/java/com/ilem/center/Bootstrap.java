@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 启动类
  *
- * @author yuwenkai
+ * @author lime
  * @date 2019/10/27 3:03 下午
  **/
 @SpringBootApplication(scanBasePackages = {

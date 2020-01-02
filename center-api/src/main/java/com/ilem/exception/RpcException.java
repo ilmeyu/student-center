@@ -7,6 +7,8 @@ package com.ilem.exception;
  **/
 public class RpcException extends RuntimeException {
 
+	private static final long serialVersionUID = 2510903574288528329L;
+
 	public RpcException() {
 		super();
 	}

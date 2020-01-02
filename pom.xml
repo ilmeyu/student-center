@@ -35,6 +35,7 @@
         <pagehelper-starter.version>1.2.12</pagehelper-starter.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
+        <spring-aop.version>2.2.0.RELEASE</spring-aop.version>
     </properties>
 
     <dependencyManagement>
@@ -113,6 +114,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
+            </dependency>
+    
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-aop.version}</version>
             </dependency>
 
         </dependencies>

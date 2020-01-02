@@ -13,4 +13,6 @@ import org.mapstruct.Mapper;
 public interface AuthUserConverter {
 
 	AuthUser userAddDto2Do(AuthUserAddRpcIn dto);
+
+	AuthUser userUpdateDto2Do(AuthUserAddRpcIn dto);
 }
