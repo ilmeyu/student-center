@@ -33,7 +33,7 @@
         <dubbo-starter.version>2.7.3</dubbo-starter.version>
         <curator-recipes.version>4.2.0</curator-recipes.version>
         <pagehelper-starter.version>1.2.12</pagehelper-starter.version>
-        <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <spring-aop.version>2.2.0.RELEASE</spring-aop.version>
     </properties>
